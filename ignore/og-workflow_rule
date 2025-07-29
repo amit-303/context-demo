@@ -1,0 +1,31 @@
+// @cursor-ignore
+
+# Project Workflow Rule
+
+This document outlines the overall coding workflow that this agent should follow for project development.
+
+1. **Initialize Project**
+   - Set up the project using a suitable framework (e.g., Create React App, Vite).
+   - Initialize a Git repository and establish the initial file structure.
+
+2. **Write PRD (Product Requirements Document)**
+   - Document all product requirements in `docs/PRD.md`.
+
+3. **Design Structure**
+   - Describe the intended project folder and file organization in `docs/project_structure.md`.
+
+4. **Plan UI/UX**
+   - Detail the design and layout plans in `docs/ui_ux.md`.
+
+5. **Implement Code**
+   - Develop the main application code (e.g., React components such as `App.js`).
+   - Ensure required functionality and apply basic styling.
+
+6. **Document Implementation**
+   - Explain the code structure and logic in `docs/implementation.md`.
+
+7. **Testing & Bug Tracking**
+   - Outline testing procedures and bug tracking methods in `docs/bug_tracking.md`.
+
+8. **Run & Refine**
+   - Start the development server, perform manual testing, and iteratively improve the application based on feedback and findings.

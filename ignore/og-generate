@@ -1,0 +1,64 @@
+// @cursor-ignore
+
+
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Guidelines for Generating Markdown and Code Files
+
+This document outlines the standards and best practices for generating markdown (`.md`, `.mdx`) and code files in this project.
+
+## Markdown Files
+
+- **Clarity & Structure:**
+  - Use clear headings and subheadings to organize content.
+  - Provide concise introductions and summaries for each section.
+  - Use bullet points or numbered lists for steps, features, or requirements.
+- **Formatting:**
+  - Use fenced code blocks (```) for code snippets, specifying the language when possible.
+  - Use bold and italics for emphasis, but avoid excessive formatting.
+  - Include tables for structured data when appropriate.
+- **Links & References:**
+  - Use relative links for internal documentation.
+  - Reference external resources with descriptive link text.
+- **Images:**
+  - Store images in a dedicated `/assets` or `/images` directory.
+  - Use markdown image syntax with alt text for accessibility.
+- **Consistency:**
+  - Follow a consistent style and tone throughout all documentation.
+  - Use American English spelling and grammar.
+
+## Code Files
+
+- **File Naming:**
+  - Use lowercase letters and hyphens or underscores for file names (e.g., `my-component.js`, `data_utils.py`).
+  - Name files according to their primary purpose or exported class/function.
+- **Structure & Organization:**
+  - Group related files in appropriate directories (e.g., `components/`, `utils/`, `services/`).
+  - Keep files focused; avoid large files with unrelated logic.
+- **Formatting & Style:**
+  - Follow the language-specific style guide (e.g., PEP8 for Python, Prettier/ESLint for JS/TS).
+  - Use consistent indentation (spaces over tabs unless otherwise specified).
+  - Include necessary import/export statements at the top of the file.
+- **Documentation:**
+  - Add docstrings or comments to explain complex logic, function parameters, and return values.
+  - Use JSDoc, TSDoc, or equivalent for documenting functions and classes.
+- **Testing:**
+  - Include or update tests when adding new code files.
+  - Place test files in a dedicated `__tests__` or `tests/` directory, mirroring the source structure.
+
+## General Best Practices
+
+- **Version Control:**
+  - Commit generated files with clear, descriptive messages.
+  - Do not commit generated files that are meant to be ignored (e.g., build artifacts).
+- **Automation:**
+  - Use scripts or tools for repetitive generation tasks to ensure consistency.
+- **Review:**
+  - Review generated files for accuracy, clarity, and adherence to these guidelines before merging.
+
+---
+
+_Refer to this document whenever generating new markdown or code files to maintain quality and consistency across the project._

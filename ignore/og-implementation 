@@ -1,0 +1,98 @@
+// @cursor-ignore
+
+# Implementation Guide: React To-Do App
+
+## 1. Technical Approach
+
+- **Framework:** React (functional components, hooks)
+- **State Management:** useState and useReducer for local state; context if global state is needed
+- **Persistence:** LocalStorage for saving tasks between sessions (no backend)
+- **Styling:** CSS Modules or styled-components for scoped, maintainable styles
+- **Responsiveness:** CSS Flexbox/Grid and media queries
+- **Accessibility:** Semantic HTML, ARIA labels, keyboard navigation
+
+## 2. Component Structure
+
+```
+<App>
+  <Header />
+  <TaskInput />
+  <TaskList>
+    <TaskItem />  // for each task
+  </TaskList>
+  <CompletedTasks /> // collapsible section
+  <Footer /> // optional
+</App>
+```
+
+- **App:** Root component, manages state and persistence
+- **Header:** App title, remaining tasks count
+- **TaskInput:** Form for adding new tasks (title required, description optional)
+- **TaskList:** Displays active (incomplete) tasks
+- **TaskItem:** Single task row (checkbox, title, description, edit/delete)
+- **CompletedTasks:** Collapsible list of completed tasks, with clear-all option
+- **Footer:** (Optional) App info/credits
+
+*Optional/Advanced:*
+- **SearchBar, FilterDropdown, BulkActions** for advanced features
+
+## 3. Key Implementation Decisions
+
+### State & Data Flow
+
+- **Tasks State:** Array of task objects `{ id, title, description, completed, [dueDate], [priority] }`
+- **Immutability:** Use spread/rest operators to update state immutably
+- **Persistence:** 
+  - On state change, serialize tasks to LocalStorage
+  - On app load, hydrate state from LocalStorage
+
+### Component Communication
+
+- **Props Drilling:** Pass handlers (add, edit, delete, toggle) from App to children
+- **Lifting State Up:** Task state lives in App; children receive props and callbacks
+
+### UI/UX
+
+- **Validation:** Prevent empty task titles; show inline error
+- **Feedback:** Instant UI updates on add/edit/delete/complete
+- **Accessibility:** 
+  - Use `<button>`, `<input>`, `<label>`
+  - Keyboard navigation for all controls
+  - Sufficient color contrast
+
+### Performance
+
+- **List Rendering:** Use `key={task.id}` for stable rendering
+- **Minimize Re-renders:** Memoize components if needed (React.memo)
+- **Efficient Updates:** Use reducer for complex state changes (optional)
+
+### Styling
+
+- **Consistent Spacing:** Use a spacing scale (e.g., 8px/16px)
+- **Visual Feedback:** Hover/focus states for buttons and list items
+- **Responsive Layout:** Stack on mobile, horizontal on desktop
+
+## 4. Advanced/Optional Features
+
+- **Due Dates/Priority:** Extend task object, add UI controls in TaskInput and TaskItem
+- **Search/Filter:** Add search bar and filter dropdowns; filter tasks in render
+- **Bulk Actions:** Checkbox selection, bulk complete/delete handlers
+
+## 5. Example Task Object
+
+```js
+{
+  id: 'uuid',
+  title: 'Buy groceries',
+  description: 'Milk, eggs, bread',
+  completed: false,
+  dueDate: '2024-06-10', // optional
+  priority: 'High' // optional
+}
+```
+
+## 6. Testing & Quality
+
+- **Unit Tests:** For pure functions (e.g., reducers, helpers)
+- **Component Tests:** For UI and interaction (e.g., using React Testing Library)
+- **Manual Testing:** Cross-browser, mobile/desktop, accessibility checks

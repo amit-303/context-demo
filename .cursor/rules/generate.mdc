@@ -1,0 +1,58 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+title: "Generation Rules"
+description: "Guide for generating project files"
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# Project Rule: generate.mdc
+
+## Metadata
+- Project: React To-Do Application (Pure frontend, no backend or database)
+- Key Docs: PRD.md, implementation.md, ui_ux.md, bug_tracking.md
+- Focus: Clean, maintainable React functional components using hooks, localStorage persistence, and solid testing & bug tracking
+
+## AI Code & Documentation Generation Guidelines
+
+### 1. Reference Existing Documentation  
+- Use **PRD.md** for product goals and scope; do not duplicate in code or docs.  
+- Follow **implementation.md** for component design, state management, and styling guidance.  
+- Use **ui_ux.md** to maintain visual and interaction consistency.  
+- Leverage **bug_tracking.md** for test scenarios and common bug fixes.
+
+### 2. Pure Frontend with Local Persistence  
+- No backend or external database: all data is stored in browser **localStorage**.  
+- Ensure localStorage read/write uses safe patterns (try/catch) to prevent crashes.  
+- Focus on fast, responsive UI updates and data persistence across page reloads.
+
+### 3. Working Demo Priority  
+- Deliver a minimal fully working app first with core features: add, edit, toggle complete, delete, filtering, and persistence.  
+- Avoid advanced features or optimizations unless requested.
+
+### 4. Code Quality & Maintainability  
+- Use React functional components and hooks.  
+- Manage state immutably, using `useState` and `useReducer` where appropriate.  
+- Keep code clean, modular, and well-commented only where necessary.
+
+### 5. Documentation & Comments  
+- Generate clear, brief documentation that complements existing markdown.  
+- Do not duplicate UI/UX or PRD content.  
+- Reference test cases and patterns from **bug_tracking.md**.
+
+### 6. Testing & Bug Handling  
+- Provide basic automated unit tests covering main user flows and localStorage persistence.  
+- Include tests for common bugs outlined in **bug_tracking.md** such as empty input, duplicate IDs, state mutation issues, localStorage errors, and UI updates.
+
+### 7. Collaboration Notes  
+- Indicate places where manual review or refinement might be needed.  
+- Avoid restating standard React behavior. Focus comments on custom logic or edge cases.
+
+---
+
+*This file guides AI-assisted generation to build a clean, functional React To-Do app focused on usability, speed, and local persistence, consistent with existing project documentation.*

@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+title: "# Project Workflow Rule"
+description: "To-do App development workflow"
+globs:
+  - "**"
+alwaysApply: false
+---
+- Format all generated Markdown with clear headings and bullet points.
+- Use concise, consistent tone across docs and comments.
+- Use functional React components with hooks.
+- Use **camelCase** for variables/functions and **PascalCase** for component names (e.g., `TodoItem`, `TodoList`).
+- Manage state **immutably** and use safe update patterns (no direct mutation).
+- Reference and align with project docs: `PRD.md`, `implementation.md`, `ui_ux.md`, and `bug_tracking.md`.
+- Format all generated Markdown files using clear **headings**, **bullet points**, and a **concise, consistent tone**.
+- Avoid duplicating information already documented; focus on minimal, working, testable output.

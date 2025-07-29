@@ -1,0 +1,81 @@
+// @cursor-ignore
+
+# Bug Tracking Guide
+
+This document describes the process for finding, reporting, and fixing issues in this project.
+
+---
+
+## 1. Finding Issues
+
+### a. Manual Testing
+- Regularly test new and existing features.
+- Follow user flows and edge cases.
+- Note any unexpected behavior, errors, or UI glitches.
+
+### b. Automated Testing
+- Run the test suite using the project’s test command (e.g., `npm test`, `pytest`, etc.).
+- Review test failures and investigate their causes.
+
+### c. Code Review
+- During code reviews, look for potential bugs, code smells, and logic errors.
+- Use static analysis tools and linters to catch common mistakes.
+
+### d. Monitoring & Logs
+- Check application logs for errors or warnings.
+- Use monitoring tools (if available) to detect runtime issues.
+
+---
+
+## 2. Reporting Issues
+
+### a. Creating a Bug Report
+- Open a new issue in the project’s issue tracker (e.g., GitHub Issues, Jira).
+- Include:
+  - **Title:** Clear and descriptive.
+  - **Description:** Steps to reproduce, expected vs. actual behavior.
+  - **Screenshots/Logs:** Attach if relevant.
+  - **Environment:** OS, browser, version, etc.
+
+### b. Labeling
+- Use appropriate labels (e.g., `bug`, `high priority`, `frontend`, `backend`).
+
+---
+
+## 3. Fixing Issues
+
+### a. Reproducing the Bug
+- Follow the steps in the bug report to reproduce the issue locally.
+- If you cannot reproduce, ask the reporter for more details.
+
+### b. Debugging
+- Use debugging tools (e.g., breakpoints, logging) to trace the root cause.
+- Check recent code changes that might be related.
+
+### c. Implementing a Fix
+- Make code changes to resolve the issue.
+- Add or update tests to cover the bug and prevent regressions.
+
+### d. Code Review & Testing
+- Open a pull request referencing the issue.
+- Request a code review.
+- Ensure all tests pass and the bug is resolved.
+
+---
+
+## 4. Closing the Issue
+
+- Once the fix is merged and verified, close the issue.
+- Add a comment describing the resolution and referencing the relevant commit or PR.
+
+---
+
+## 5. Best Practices
+
+- Keep bug reports and fixes well-documented.
+- Prioritize critical bugs.
+- Communicate clearly with team members and reporters.
+
+---
+
+_This guide should be updated as the project’s workflow evolves._
