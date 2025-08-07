@@ -39,7 +39,7 @@ todo-app/
 │   ├── bug_tracking.md        # Bug tracking and test scenarios
 │   ├── project_structure.md   # Project folder/file overview (this file)
 │   └── project_diagram.mmd    # Project structure diagram (Mermaid)
-├── agents/                    # Custom automation agents for code review and more
+├── .agents/                   # Custom automation agents for code review and more
 │   ├── agent.mjs              # Agent entry/configuration file
 │   ├── codeReviewAgent.mjs    # Automated code review agent logic
 │   ├── outputs/               # Agent output files (e.g., code review feedback)

@@ -19,7 +19,7 @@ export async function run({ context }) {
 
 // Save the agent's response to a file after it runs
 export async function postprocess({ context, response }) {
-  const outputPath = "agents/outputs/code_review_feedback.mdc";
+  const outputPath = ".agents/outputs/code_review_feedback.mdc";
   await context.writeProjectFile(outputPath, response);
   return `Code review output saved to ${outputPath}`;
   }
