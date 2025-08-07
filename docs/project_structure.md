@@ -1,27 +1,88 @@
+# Project Structure
+
+```
 todo-app/
-├── package.json / package-lock.json        # Project dependencies and scripts
-├── README.md                              # Project overview and usage
-├── .gitignore                            # Git ignored files
-├── .cursor/
-│   └── rules/
-│       ├── generate.mdc                  # Generation and documentation guidelines
-│       └── workflow.mdc                  # Workflow and formatting rules
-├── node_modules/                         # Installed dependencies (auto-generated)
-├── public/                               # Static assets and HTML template
-├── src/
-│   ├── App.js                           # Main app component, state management, localStorage logic
-│   ├── TodoList.js                      # Renders a list of tasks (maps to TodoItem)
-│   ├── TodoItem.js                      # Displays a single task (checkbox, text, delete)
-│   ├── index.js                         # App entry point, renders <App />
-│   ├── index.css                        # Global styles
-│   ├── App.css                          # App/component-specific styles
-│   ├── App.test.js                      # Basic test for <App />
-│   ├── setupTests.js                    # Test setup (Jest, React Testing Library)
-│   ├── reportWebVitals.js               # Web Vitals reporting (optional)
-│   └── logo.svg                         # React logo (default asset)
-├── docs/
-│   ├── PRD.md                          # Product requirements
-│   ├── implementation.md               # Technical/component design
-│   ├── ui_ux.md                       # UI/UX guidelines
-│   ├── bug_tracking.md                 # Bug tracking and test scenarios
-│   └── project_structure.md            # Project folder/file overview
+├── README.md                  # Project overview, setup, and usage instructions
+├── package.json               # Project dependencies, scripts, and metadata
+├── package-lock.json          # Exact dependency versions (auto-generated)
+├── .gitignore                 # Files and folders ignored by Git
+├── .cursorignore              # Files and folders ignored by Cursor IDE
+├── .DS_Store                  # macOS system file (can be ignored)
+├── .git/                      # Git version control data (auto-managed)
+├── node_modules/              # Installed dependencies (auto-generated)
+├── coverage/                  # Test coverage reports (auto-generated)
+│   └── lcov-report/           # HTML coverage reports
+├── ignore/                    # Placeholder for ignored or temporary files
+├── public/                    # Static assets and HTML template
+│   ├── index.html             # Main HTML template
+│   ├── favicon.ico            # Browser favicon
+│   ├── manifest.json          # PWA manifest
+│   ├── robots.txt             # Search engine robots file
+│   ├── logo192.png            # App logo (192px)
+│   └── logo512.png            # App logo (512px)
+├── src/                       # Application source code (React app)
+│   ├── App.js                 # Main app component, state management, localStorage logic
+│   ├── App.css                # App/component-specific styles
+│   ├── App.test.js            # Comprehensive tests for <App />
+│   ├── TodoList.js            # Renders a list of tasks (maps to TodoItem)
+│   ├── TodoItem.js            # Displays a single task (checkbox, text, delete)
+│   ├── TodoItem.test.js       # Tests for <TodoItem />
+│   ├── index.js               # App entry point, renders <App />
+│   ├── index.css              # Global styles
+│   ├── setupTests.js          # Test setup (Jest, React Testing Library)
+│   ├── reportWebVitals.js     # Web Vitals reporting (optional)
+│   └── logo.svg               # React logo (default asset)
+├── docs/                      # Project documentation
+│   ├── PRD.md                 # Product requirements
+│   ├── implementation.md      # Technical/component design
+│   ├── ui_ux.md               # UI/UX guidelines
+│   ├── bug_tracking.md        # Bug tracking and test scenarios
+│   ├── project_structure.md   # Project folder/file overview (this file)
+│   └── project_diagram.mmd    # Project structure diagram (Mermaid)
+├── agents/                    # Custom automation agents for code review and more
+│   ├── agent.mjs              # Agent entry/configuration file
+│   ├── codeReviewAgent.mjs    # Automated code review agent logic
+│   ├── outputs/               # Agent output files (e.g., code review feedback)
+│   │   └── code_review_feedback.mdc
+│   └── subagents/             # Subagents for specialized automation tasks
+│       ├── codeReviewAgent.mjs
+│       └── .DS_Store
+├── .cursor/                   # Cursor IDE configuration and rules
+│   └── rules/                 # Project-specific rules for code review, generation, workflow
+│       ├── code_review.mdc
+│       ├── generate.mdc
+│       └── workflow.mdc
+└── CODE_REVIEW_REPORT.md      # Code review report (auto-generated)
+```
+
+---
+
+## Directory & File Purpose
+
+- **README.md**: Start here for project overview, setup, and usage.
+- **package.json / package-lock.json**: Manage dependencies, scripts, and project metadata.
+- **.gitignore / .cursorignore**: Specify files/folders to exclude from Git and Cursor operations.
+- **public/**: Contains static assets and the main HTML template for the React app.
+- **src/**: All React source code, styles, and tests. Main development happens here.
+- **docs/**: Key documentation for requirements, design, UI/UX, bug tracking, and structure.
+- **agents/**: Automation scripts for code review and other tasks. Includes agent logic, outputs, and subagents.
+- **.cursor/**: Cursor IDE configuration and custom rules for code review, code generation, and workflow.
+- **coverage/**: Auto-generated test coverage reports (after running tests).
+- **ignore/**: Placeholder for files you want to keep out of version control and builds.
+- **node_modules/**: Auto-generated by npm/yarn; contains installed dependencies.
+- **.git/**: Git version control data (managed automatically).
+- **CODE_REVIEW_REPORT.md**: Auto-generated code review report for the project.
+
+---
+
+**Note:**  
+- The `agents/` directory is used for custom automation, such as code review bots, and is separate from the main app logic in `src/`.
+- The `.cursor/` directory holds IDE-specific rules and should not be modified unless updating code review or generation policies.
+- All persistent app data is stored in the browser’s localStorage—no backend or external database is used.
+
+---
+
+This structure is designed for clarity, maintainability, and ease of onboarding for new contributors. For more details on architecture, UI/UX, or testing, see the relevant files in the `docs/` directory.
+
+
+---

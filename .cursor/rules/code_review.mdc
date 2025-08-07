@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+title: "Code Review Rules"
+description: "Code Review Guidelines"
+globs:
+  - "**/*"
+alwaysApply: true
+---
+# Code Review: React To-Do App
+
+## 1. Functional & Technical Requirements
+- The code must align with the product goals and scope defined in the `PRD.md`[cite: 1, 21].
+- The implementation should follow the component design and state management guidance provided in `implementation.md`[cite: 2, 21].
+- All data must be stored in the browser's `localStorage`[cite: 4, 21]. [cite_start]The code must not use a backend or external database[cite: 4].
+- Ensure `localStorage` read/write operations use safe patterns, such as `try/catch` blocks, to prevent application crashes[cite: 5, 6].
+- Verify that the core features—add, edit, toggle complete, delete, filtering, and persistence—are implemented and functional[cite: 8].
+
+## 2. Code Quality & Style
+- The code must use React functional components and hooks[cite: 9, 19].
+- State should be managed immutably, and the code should avoid direct mutation[cite: 10, 20].
+- Variable and function names must use `camelCase`, and component names must use `PascalCase`[cite: 19].
+- Code should be clean, modular, and well-commented, but only where necessary[cite: 10, 16].
+- All generated Markdown should use clear headings and bullet points[cite: 17, 22].
+
+## 3. Documentation & UI/UX
+- Generated documentation and code should not duplicate information from `PRD.md` or `ui_ux.md`[cite: 2, 3, 11].
+- The UI and interactions should be consistent with the design guidelines in `ui_ux.md`[cite: 3].
+- All generated Markdown files must be formatted using clear headings, bullet points, and a concise, consistent tone[cite: 22].
+
+## 4. Testing & Bug Handling
+- The code must include basic automated unit tests that cover main user flows and `localStorage` persistence[cite: 13].
+- Tests should cover common bug scenarios mentioned in `bug_tracking.md`, such as empty input, duplicate IDs, and `localStorage` errors[cite: 14].
+- Check for notes or comments that indicate where manual review or refinement might be needed[cite: 15].

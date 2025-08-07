@@ -1,0 +1,271 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+You are a code reviewer. Use the following rules to guide your feedback:
+
+---
+description: 
+globs: 
+# Code Review Feedback: React To-Do Application
+
+## Executive Summary
+
+The React To-Do application demonstrates good React practices but has several critical issues that need immediate attention. The application meets most functional requirements but suffers from architectural problems and test failures.
+
+**Overall Assessment: ⚠️ Needs Improvement**
+
+---
+
+## 1. Functional & Technical Requirements Compliance
+
+### ✅ **Strengths:**
+- **Core Features Implemented:** All required features (add, edit, toggle complete, delete, filtering, persistence) are functional
+- **localStorage Integration:** Properly implemented with safe error handling using try/catch blocks
+- **React Best Practices:** Uses functional components and hooks as required
+- **State Management:** Immutable state updates using spread operator
+- **Input Validation:** Prevents empty task submission with proper error handling
+
+### ❌ **Critical Issues:**
+
+#### 1.1 **Edit Form Duplication Bug (CRITICAL)**
+**Problem:** Both `App.js` and `TodoItem.js` render edit forms simultaneously
+```javascript
+// App.js lines 95-125: Renders edit form in main component
+{editingId ? (
+  <form onSubmit={handleEditSave} className="todo-form">
+    // Edit inputs...
+  </form>
+) : (
+  // Add form...
+)}
+
+// TodoItem.js lines 3-25: Also renders edit form
+if (isEditing) {
+  return (
+    <form onSubmit={onEditSave} role="form">
+      // Edit inputs...
+    </form>
+  );
+}
+```
+**Impact:** Tests fail, confusing user experience, multiple edit forms visible
+
+#### 1.2 **Excessive Prop Drilling**
+**Problem:** TodoList receives 10 props for edit functionality
+```javascript
+// TodoList.js line 4
+function TodoList({ tasks, onToggle, onDelete, onEdit, editingId, editInput, editDescInput, setEditInput, setEditDescInput, onEditSave, onEditCancel })
+```
+
+#### 1.3 **Filter Count Logic Bug**
+**Problem:** Task count doesn't update correctly when filtering
+```javascript
+// App.js line 89
+const activeCount = tasks.filter(t => !t.completed).length;
+// Always shows total active tasks, not filtered count
+```
+
+---
+
+## 2. Code Quality & Style Analysis
+
+### ✅ **Good Practices:**
+- **Naming Conventions:** Uses camelCase for variables/functions, PascalCase for components
+- **Error Handling:** localStorage operations wrapped in try/catch
+- **Accessibility:** Proper ARIA labels and semantic HTML
+- **Component Structure:** Clear separation of concerns
+
+### ❌ **Areas for Improvement:**
+
+#### 2.1 **Inconsistent Styling Approach**
+```javascript
+// TodoItem.js uses extensive inline styles instead of CSS classes
+// Lines 4-8, 25-45: All styling is inline
+style={{ display: 'flex', alignItems: 'center', background: '#fff', ... }}
+```
+
+#### 2.2 **Component Responsibility Violation**
+- TodoItem handles both display and editing, violating single responsibility principle
+- Edit state management is duplicated between components
+
+#### 2.3 **Header Styling Issues**
+```javascript
+// App.js lines 85-89: Unprofessional header styling
+<h1 className="App-title">-----------------------------------</h1>
+<h2 className="App-title" style={{ color: 'purple' }}>Amit Vibing- Context Mgmt demo</h2>
+```
+
+---
+
+## 3. Testing & Bug Handling
+
+### ✅ **Test Coverage:**
+- **Good Coverage:** 69.69% statement coverage, 80% branch coverage
+- **Comprehensive Tests:** 54 total tests covering main user flows
+- **localStorage Testing:** Proper mocking and error scenario testing
+
+### ❌ **Test Failures (6 failing tests):**
+
+#### 3.1 **Duplicate Element Issues**
+```
+TestingLibraryElementError: Found multiple elements with the placeholder text of: Edit task title...
+```
+**Root Cause:** Both App.js and TodoItem.js render edit forms simultaneously
+
+#### 3.2 **Filter Count Assertion Failures**
+```
+expect(screen.getByText('0 tasks left')).toBeInTheDocument();
+```
+**Root Cause:** Task count doesn't update correctly when filtering to completed tasks
+
+---
+
+## 4. UI/UX Compliance
+
+### ✅ **Design Implementation:**
+- **Responsive Layout:** Uses flexbox and responsive design patterns
+- **Visual Feedback:** Hover states, transitions, and clear visual hierarchy
+- **Accessibility:** Proper ARIA labels and keyboard navigation support
+
+### ❌ **UI Issues:**
+- **Edit Form Duplication:** Creates confusing user experience
+- **Header Styling:** Custom header text doesn't match professional design guidelines
+- **Inline Styles:** Mix of CSS classes and inline styles creates inconsistency
+
+---
+
+## 5. Recommendations
+
+### 5.1 **Immediate Fixes (Priority 1)**
+
+#### Fix Edit Form Duplication
+```javascript
+// Remove edit form from App.js (lines 95-125)
+// Keep edit functionality only in TodoItem.js
+// Update App.js to only handle edit state management
+```
+
+#### Fix Filter Count Logic
+```javascript
+// Update task count to reflect filtered results
+const displayCount = filteredTasks.filter(t => !t.completed).length;
+```
+
+### 5.2 **Architecture Improvements (Priority 2)**
+
+#### Refactor Edit State Management
+```javascript
+// Create custom hook for edit state
+const useEditState = () => {
+  const [editingId, setEditingId] = useState(null);
+  const [editInput, setEditInput] = useState('');
+  const [editDescInput, setEditDescInput] = useState('');
+  
+  const startEdit = (task) => {
+    setEditingId(task.id);
+    setEditInput(task.text);
+    setEditDescInput(task.description || '');
+  };
+  
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditInput('');
+    setEditDescInput('');
+  };
+  
+  return { editingId, editInput, editDescInput, startEdit, cancelEdit };
+};
+```
+
+#### Reduce Prop Drilling
+```javascript
+// Use React Context for edit state management
+// Or move edit logic to TodoItem component entirely
+```
+
+### 5.3 **Code Quality Improvements (Priority 3)**
+
+#### Standardize Styling
+```javascript
+// Move all inline styles to CSS classes
+// Create consistent component styling approach
+```
+
+#### Improve Component Structure
+```javascript
+// Split TodoItem into TodoItemDisplay and TodoItemEdit components
+// Follow single responsibility principle
+```
+
+---
+
+## 6. Security & Performance
+
+### ✅ **Security:**
+- **Input Sanitization:** Basic validation prevents empty tasks
+- **localStorage Safety:** Proper error handling prevents crashes
+
+### ⚠️ **Performance Considerations:**
+- **Re-render Optimization:** Consider React.memo for TodoItem
+- **localStorage Frequency:** Saves on every state change (consider debouncing)
+
+---
+
+## 7. Testing Recommendations
+
+### 7.1 **Fix Existing Tests**
+- Update test selectors to handle single edit form
+- Fix filter count assertions
+- Add more specific test queries
+
+### 7.2 **Add Missing Tests**
+- localStorage error scenarios
+- Edge cases for task operations
+- Accessibility testing
+
+---
+
+## 8. Final Assessment
+
+### **Strengths:**
+- ✅ Core functionality works correctly
+- ✅ Good test coverage and error handling
+- ✅ Follows React best practices
+- ✅ Proper localStorage implementation
+- ✅ Accessible and responsive design
+
+### **Critical Issues:**
+- ❌ Edit form duplication causing test failures
+- ❌ Filter count logic bug
+- ❌ Excessive prop drilling
+- ❌ Inconsistent styling approach
+
+### **Recommendation:**
+**Fix the critical edit functionality bug first, then address the architecture issues. The application is functional but needs immediate attention to the test failures and edit state management.**
+
+---
+
+## 9. Action Items
+
+### **Immediate (This Sprint):**
+1. 🔴 Fix edit form duplication bug
+2. 🔴 Fix filter count logic
+3. 🟡 Update failing tests
+
+### **Short Term (Next Sprint):**
+1. 🟡 Refactor edit state management
+2. 🟡 Reduce prop drilling
+3. 🟡 Standardize styling approach
+
+### **Long Term:**
+1. 🟢 Add comprehensive error boundary
+2. 🟢 Implement performance optimizations
+3. 🟢 Add comprehensive documentation
+
+---
+
+**Reviewer:** Code Review Agent  
+**Date:** Current  
+**Status:** Requires Immediate Attention
