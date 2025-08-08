@@ -10,11 +10,9 @@ globs:
   - "**"
 alwaysApply: false
 ---
-- Format all generated Markdown with clear headings and bullet points.
-- Use concise, consistent tone across docs and comments.
-- Use functional React components with hooks.
-- Use **camelCase** for variables/functions and **PascalCase** for component names (e.g., `TodoItem`, `TodoList`).
-- Manage state **immutably** and use safe update patterns (no direct mutation).
 - Reference and align with project docs: `PRD.md`, `implementation.md`, `ui_ux.md`, and `bug_tracking.md`.
 - Format all generated Markdown files using clear **headings**, **bullet points**, and a **concise, consistent tone**.
 - Avoid duplicating information already documented; focus on minimal, working, testable output.
+- Before writing any code file, confirm the feature requirements from the relevant docs (ask questions if unclear).
+- When changes affect multiple parts (e.g. adding a filter), coordinate updates across code and docs.
+- Use checkpoints (restore points) after each major feature is implemented, to allow rollback if needed.
